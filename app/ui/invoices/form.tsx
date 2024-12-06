@@ -10,16 +10,23 @@ import Link from "next/link";
 import React, { useActionState } from "react";
 import { Button } from "../button";
 
+type CreateInvoiceAction = (
+  prevState: State,
+  formData: FormData
+) => Promise<State>;
+
+type EditInvoiceAction = (
+  prevState: State,
+  formData: FormData,
+  id: string
+) => Promise<State>;
+
 const Form = ({
   invoiceAction,
   customers,
   invoice,
 }: {
-  invoiceAction: (
-    prevState: State,
-    formData: FormData,
-    id?: string
-  ) => Promise<State>;
+  invoiceAction: CreateInvoiceAction | EditInvoiceAction;
   customers: CustomerField[];
   invoice?: Invoice;
 }) => {
@@ -40,8 +47,15 @@ const Form = ({
       };
 
   const [state, formAction] = useActionState(
-    (state: State, formData: FormData) =>
-      invoiceAction(state, formData, invoice?.id),
+    (state: State, formData: FormData) => {
+      if (invoice) {
+        const editAction = invoiceAction as EditInvoiceAction;
+        return editAction(state, formData, invoice.id);
+      } else {
+        const createAction = invoiceAction as CreateInvoiceAction;
+        return createAction(state, formData);
+      }
+    },
     initialState
   );
 
@@ -179,7 +193,9 @@ const Form = ({
         >
           Cancel
         </Link>
-        <Button type="submit">Create Invoice</Button>
+        <Button type="submit">
+          {invoice ? "Update Invoice" : "Create Invoice"}
+        </Button>
       </div>
     </form>
   );

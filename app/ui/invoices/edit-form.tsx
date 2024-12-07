@@ -1,6 +1,6 @@
 "use client";
 
-import { CustomerField, Invoice } from "@/app/lib/definitions";
+import { CustomerField, InvoiceForm } from "@/app/lib/definitions";
 import { editInvoice } from "@/app/lib/actions";
 import Form from "./form";
 
@@ -8,7 +8,7 @@ export default function EditInvoiceForm({
   invoice,
   customers,
 }: {
-  invoice: Invoice;
+  invoice: InvoiceForm;
   customers: CustomerField[];
 }) {
   return (

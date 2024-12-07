@@ -1,5 +1,5 @@
 import { State } from "@/app/lib/actions";
-import { CustomerField, Invoice } from "@/app/lib/definitions";
+import { CustomerField, InvoiceForm } from "@/app/lib/definitions";
 import {
   CheckIcon,
   ClockIcon,
@@ -28,7 +28,7 @@ const Form = ({
 }: {
   invoiceAction: CreateInvoiceAction | EditInvoiceAction;
   customers: CustomerField[];
-  invoice?: Invoice;
+  invoice?: InvoiceForm;
 }) => {
   const initialState: State = invoice
     ? {

@@ -9,6 +9,12 @@ import {
 } from "@/app/ui/skeletons";
 import CardsWrapper from "@/app/ui/dashboard/cardsWrapper";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard | Acme Dashboard",
+};
+
 export default async function Page() {
   return (
     <main>

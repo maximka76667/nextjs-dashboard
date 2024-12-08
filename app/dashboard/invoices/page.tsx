@@ -7,6 +7,12 @@ import Table from "@/app/ui/invoices/table";
 import { fetchInvoicesPages } from "@/app/lib/data";
 import Pagination from "@/app/ui/invoices/pagination";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Invoices | Acme Dashboard",
+};
+
 export default async function Page(props: {
   searchParams?: Promise<{ query?: string; page?: string }>;
 }) {
